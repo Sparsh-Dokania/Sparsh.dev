@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import Robo from './components/ui/Robo';
 import ShootingStarsAndStarsBackground from './Bg';
-import { Facebook, Link, Link2, Linkedin, Twitter } from "lucide-react"
+  // import share button from its component file
+import { ShareButtonDemo } from './components/ui/share-button-demo';
 
 import About from "./components/sections/About";
 import Projects from "./components/sections/Projects";
@@ -11,77 +12,6 @@ import Skills from "./components/sections/Skills";
 import Experience from "./components/sections/Experience";
 import Contact from "./components/sections/Contact";
 import Footer from "./components/Footer";
-
-function ShareButton({ links, className, children }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className={`relative inline-block ${className ?? ""}`}>
-      <button
-        onClick={() => setOpen((s) => !s)}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
-        aria-expanded={open}
-      >
-        {children}
-      </button>
-
-      {open && (
-        <div className="absolute right-0 mt-2 w-52 bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg p-2 z-50">
-          {links.map((l, i) => {
-            const Icon = l.icon
-            return (
-              <button
-                key={i}
-                onClick={() => {
-                  l.onClick?.()
-                  setOpen(false)
-                }}
-                className="w-full text-left flex items-center gap-3 px-2 py-2 rounded hover:bg-neutral-800 text-white"
-              >
-                <Icon size={18} />
-                <span className="text-sm">{l.label}</span>
-              </button>
-            )
-          })}
-        </div>
-      )}
-    </div>
-  )
-}
-
-// Example usage
-export function ShareButtonDemo() {
-  const shareLinks = [
-    {
-      icon: Twitter,
-      onClick: () => window.open("https://twitter.com/share"),
-      label: "",
-    },
-    {
-      icon: Facebook,
-      onClick: () => window.open("https://facebook.com/share"),
-      label: "",
-    },
-    {
-      icon: Linkedin,
-      onClick: () => window.open("https://linkedin.com/share"),
-      label: "",
-    },
-    {
-      icon: Link,
-      onClick: () => navigator.clipboard.writeText(window.location.href),
-      label: "",
-    },
-  ]
-
-  return (
-    <div>
-      <ShareButton links={shareLinks} className="text-lg font-medium">
-        <Link size={15} />
-        Let's Connect
-      </ShareButton>
-    </div>
-  )
-}
 
 function App() {
   const [count, setCount] = useState(0)

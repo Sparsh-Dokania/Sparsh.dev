@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { LucideIcon } from "lucide-react"
 
 import { cn } from "../../lib/utils"
+import Button from "./button"
 
 interface ShareLink {
   icon: LucideIcon
@@ -86,4 +87,4 @@ const ShareButton = ({
   )
 }
 
-export ShareButton
+export default ShareButton
