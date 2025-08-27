@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Robo from './components/ui/Robo';
 import ShootingStarsAndStarsBackground from './Bg';
   // import share button from its component file
-import { ShareButtonDemo } from './components/ui/share-button-demo';
+// import { ShareButtonDemo } from './components/ui/share-button-demo';
 
 import About from "./components/sections/About";
 import Projects from "./components/sections/Projects";

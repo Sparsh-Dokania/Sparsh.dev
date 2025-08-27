@@ -4,7 +4,7 @@ import React from "react"
 import { Twitter, Facebook, Linkedin, Link } from "lucide-react"
 import ShareButton from "./share-button"
 
-export function ShareButtonDemo(): React.FC {
+export function ShareButtonDemo(): React.ReactElement {
   const shareLinks = [
     {
       icon: Twitter,

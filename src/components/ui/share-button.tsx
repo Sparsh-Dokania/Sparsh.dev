@@ -4,7 +4,17 @@ import React, { useState } from "react"
 import { LucideIcon } from "lucide-react"
 
 import { cn } from "../../lib/utils"
-import Button from "./button"
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: React.ReactNode;
+  className?: string;
+}
+
+const Button = ({ children, className, ...props }: ButtonProps) => (
+  <button className={className} {...props}>
+    {children}
+  </button>
+);
 
 interface ShareLink {
   icon: LucideIcon
