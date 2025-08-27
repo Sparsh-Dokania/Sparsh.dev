@@ -1,28 +1,110 @@
+"use client"
+
 import { useState } from 'react'
 import Robo from './components/ui/Robo';
 import ShootingStarsAndStarsBackground from './Bg';
-import Navbar from './components/Navbar';
+// import Image from "next/image"
+import { Facebook, Link, Link2, Linkedin, Twitter } from "lucide-react"
+ 
+
+function ShareButton({ links, className, children }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className={`relative inline-block ${className ?? ""}`}>
+      <button
+        onClick={() => setOpen((s) => !s)}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition"
+        aria-expanded={open}
+      >
+        {children}
+      </button>
+
+      {open && (
+        <div className="absolute right-0 mt-2 w-52 bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg p-2 z-50">
+          {links.map((l, i) => {
+            const Icon = l.icon
+            return (
+              <button
+                key={i}
+                onClick={() => {
+                  l.onClick?.()
+                  setOpen(false)
+                }}
+                className="w-full text-left flex items-center gap-3 px-2 py-2 rounded hover:bg-neutral-800 text-white"
+              >
+                <Icon size={18} />
+                <span className="text-sm">{l.label}</span>
+              </button>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Example usage
+export function ShareButtonDemo() {
+  const shareLinks = [
+    {
+      icon: Twitter,
+      onClick: () => window.open("https://twitter.com/share"),
+      label: "",
+    },
+    {
+      icon: Facebook,
+      onClick: () => window.open("https://facebook.com/share"),
+      label: "",
+    },
+    {
+      icon: Linkedin,
+      onClick: () => window.open("https://linkedin.com/share"),
+      label: "",
+    },
+    {
+      icon: Link,
+      onClick: () => navigator.clipboard.writeText(window.location.href),
+      label: "",
+    },
+  ]
+
+  return (
+    <div>
+      <ShareButton links={shareLinks} className="text-lg font-medium">
+        <Link size={15} />
+        Let's Connect
+      </ShareButton>
+    </div>
+  )
+}
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="relative min-h-screen bg-black h-full w-full overflow-hidden">
-      <div className="absolute min-h-screen inset-0 w-full h-screen z-0 overflow-hidden">
+    <div className="relative w-screen h-screen bg-black overflow-hidden">
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
         <ShootingStarsAndStarsBackground />
       </div>
-      <Navbar />
-      <section className="flex items-center justify-center h-screen pt-20 relative z-10">
-        <div className="flex-1 text-white flex flex-col justify-center items-start pl-16 gap-8">
-          <h1 className="text-5xl font-bold mb-4">Hello, I am Sparsh</h1>
-          <p className="text-xl max-w-lg mb-8">
+
+      <section className="relative z-10 flex flex-col-reverse md:flex-row items-stretch justify-center w-full h-screen max-w-full px-4 sm:px-8 md:px-16 lg:px-24 py-8 md:py-16 gap-80 md:gap-16">
+       
+        <div className="w-full md:w-2/3 flex flex-col justify-center items-center md:items-start text-center md:text-left gap-6 md:gap-8 max-w-3xl px-4 md:px-0">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight text-white">
+            Hello, I am Sparsh
+          </h1>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-xl">
             I am a passionate developer crafting beautiful web experiences. Explore my portfolio to see my work and get in touch!
           </p>
-          <a href="#contact" className="px-8 py-3 bg-white/20 text-white font-bold text-lg rounded-full backdrop-blur-md shadow-lg no-underline transition-colors hover:bg-white/30">Contact Me</a>
+          <div className="mt-4">
+            <ShareButtonDemo />
+          </div>
         </div>
-        <div className="flex-1 flex justify-center items-center h-full relative z-20">
-          <Robo />
-        </div>
+
+      
+        <div className="w-full md:w-1/3 flex justify-center md:justify-end items-center h-64 md:h-full mt-8 md:mt-0 px-4 md:px-0">
+       <Robo/>
+       </div>
       </section>
     </div>
   )
