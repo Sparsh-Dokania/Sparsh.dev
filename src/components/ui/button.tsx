@@ -7,9 +7,7 @@ import { Facebook, Link, Link2, Linkedin, Twitter } from "lucide-react"
 
 import ShareButtonComponent from "../ui/share-button"
 
-// Removed invalid module declaration and export for non-existent module
 
-// Example usage
 export default function ShareButton(): React.JSX.Element {
   const shareLinks = [
     {

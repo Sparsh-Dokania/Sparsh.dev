@@ -2,7 +2,7 @@
 
 import React from "react"
 import Robo from "./ui/Robo"
-import { ShareButtonDemo } from "./ui/share-button-demo"
+import ShareButton from "./ui/share-button"
 import { Twitter, Facebook, Linkedin, Link } from "lucide-react"
 
 const shareLinks = [
@@ -26,10 +26,10 @@ export default function Hero() {
           I am a passionate developer crafting beautiful web experiences. Explore my portfolio to see my work and get in touch!
         </p>
         <div className="color-white/90 flex items-center gap-4">
-          <ShareButtonDemo links={shareLinks}>
+          <ShareButton links={shareLinks}>
             <Link className="h-4 w-4" />
             <span className="ml-2">Let's Connect</span>
-          </ShareButtonDemo>
+          </ShareButton>
         </div>
         
      
