@@ -3,6 +3,14 @@
 import React from "react"
 import Robo from "./ui/Robo"
 import { ShareButtonDemo } from "./ui/share-button-demo"
+import { Twitter, Facebook, Linkedin, Link } from "lucide-react"
+
+const shareLinks = [
+  { icon: Twitter, onClick: () => window.open("https://twitter.com/share"), label: "Twitter" },
+  { icon: Facebook, onClick: () => window.open("https://facebook.com/share"), label: "Facebook" },
+  { icon: Linkedin, onClick: () => window.open("https://linkedin.com/share"), label: "LinkedIn" },
+  { icon: Link, onClick: () => navigator.clipboard.writeText(window.location.href), label: "Copy link" },
+]
 
 export default function Hero() {
   return (
@@ -17,9 +25,14 @@ export default function Hero() {
         <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-xl">
           I am a passionate developer crafting beautiful web experiences. Explore my portfolio to see my work and get in touch!
         </p>
-        <div className="mt-4">
-          <ShareButtonDemo />
+        <div className="color-white/90 flex items-center gap-4">
+          <ShareButtonDemo links={shareLinks}>
+            <Link className="h-4 w-4" />
+            <span className="ml-2">Let's Connect</span>
+          </ShareButtonDemo>
         </div>
+        
+     
       </div>
 
       <div className="w-full md:w-1/3 flex justify-end items-center h-64 md:h-full mt-8 md:mt-0 px-4 md:px-6">

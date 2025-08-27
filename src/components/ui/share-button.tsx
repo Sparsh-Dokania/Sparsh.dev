@@ -6,15 +6,17 @@ import { LucideIcon } from "lucide-react"
 import { cn } from "../../lib/utils"
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode;
-  className?: string;
+  children?: React.ReactNode
+  // your props here
 }
 
-const Button = ({ children, className, ...props }: ButtonProps) => (
-  <button className={className} {...props}>
-    {children}
-  </button>
-);
+const Button = ({ className, children, ...props }: ButtonProps) => {
+  return (
+    <button className={className} {...props}>
+      {children}
+    </button>
+  )
+}
 
 interface ShareLink {
   icon: LucideIcon
@@ -31,68 +33,34 @@ interface ShareButtonProps
 
 const ShareButton = ({
   className,
-  links,
+  links = [], // default to empty array
   children,
   ...props
 }: ShareButtonProps) => {
-  const [isHovered, setIsHovered] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  // ensure links is an array
+  const items = Array.isArray(links) ? links : []
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <Button
-        className={cn(
-          "relative min-w-40  rounded-3xl ",
-          "bg-white dark:bg-black",
-          "hover:bg-gray-50 dark:hover:bg-gray-950",
-          "text-black dark:text-white",
-          "border border-black/10 dark:border-white/10",
-          "transition-all duration-300",
-          isHovered ? "opacity-0" : "opacity-100",
-          className
-        )}
-        {...props}
-      >
-        <span className="flex items-center gap-2">{children}</span>
-      </Button>
+    <div className={`relative inline-block ${className ?? ""}`}>
+      <button onClick={() => setOpen(s => !s)} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white">
+        {children}
+      </button>
 
-      <div className="absolute left-0 top-0 flex h-10">
-        {links.map((link, index) => {
-          const Icon = link.icon
-          return (
-            <button
-              type="button"
-              key={index}
-              onClick={link.onClick}
-              className={cn(
-                "h-10",
-                "w-10",
-                "flex items-center justify-center",
-                "bg-black dark:bg-white",
-                "text-white dark:text-black",
-                "transition-all duration-300",
-                index === 0 && "rounded-l-3xl",
-                index === links.length - 1 && "rounded-r-3xl",
-                "border-r border-white/10 last:border-r-0 dark:border-black/10",
-                "hover:bg-gray-900 dark:hover:bg-gray-100",
-                "",
-                isHovered
-                  ? "translate-x-0 opacity-100"
-                  : "-translate-x-full opacity-0",
-                index === 0 && "transition-all duration-200",
-                index === 1 && "delay-[50ms] transition-all duration-200",
-                index === 2 && "transition-all delay-100 duration-200",
-                index === 3 && "transition-all delay-150 duration-200"
-              )}
-            >
-              <Icon className="size-4" />
-            </button>
-          )
-        })}
-      </div>
+      {open && (
+        <div className="absolute right-0 mt-2 w-52 bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg p-2 z-50">
+          {items.map((l, i) => {
+            const Icon = l.icon
+            return (
+              <button key={i} onClick={() => { l.onClick?.(); setOpen(false) }} className="w-full text-left flex items-center gap-3 px-2 py-2 rounded hover:bg-neutral-800">
+                <Icon size={18} />
+                <span className="text-sm">{l.label}</span>
+              </button>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }

@@ -7,8 +7,10 @@ import { Facebook, Link, Link2, Linkedin, Twitter } from "lucide-react"
 
 import ShareButtonComponent from "../ui/share-button"
 
+// Removed invalid module declaration and export for non-existent module
+
 // Example usage
-function ShareButton(): React.JSX.Element {
+export default function ShareButton(): React.JSX.Element {
   const shareLinks = [
     {
       icon: Twitter,
@@ -33,13 +35,11 @@ function ShareButton(): React.JSX.Element {
   ]
 
   return (
-    <div>
-      <ShareButtonComponent links={shareLinks} className=" text-lg font-medium  ">
-        <Link size={15} />
-        Share
-      </ShareButtonComponent>
-    </div>
+    <button type="button" aria-label="Share">
+        <ShareButtonComponent links={shareLinks}>
+            <Link2 className="h-4 w-4" />
+            <span className="ml-2">Let's Connect</span>
+        </ShareButtonComponent>
+    </button>
   )
 }
-
-export default ShareButton
