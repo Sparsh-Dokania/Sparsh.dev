@@ -16,13 +16,14 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="relative w-screen min-h-screen bg-black text-white overflow-x-hidden">
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
-        <ShootingStarsAndStarsBackground />
-      </div>
+    <div className="relative w-screen min-h-screen bg-transparent text-white overflow-x-hidden">
+      {/* global background (fixed) */}
+      <ShootingStarsAndStarsBackground />
 
       {/* HERO */}
-      <Hero />
+      <div className="relative z-10">
+        <Hero />
+      </div>
 
       {/* MAIN CONTENT (after hero) */}
       <main className="relative z-20">
