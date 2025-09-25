@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import ShootingStarsAndStarsBackground from './Bg'
+import Navbar from './components/Navbar'
 // import the new Hero component
 import Hero from './components/Hero'
 
@@ -16,12 +17,15 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="relative w-screen min-h-screen bg-transparent text-white overflow-x-hidden">
+    <div className="relative w-full min-h-screen bg-transparent text-white overflow-x-hidden">
       {/* global background (fixed) */}
       <ShootingStarsAndStarsBackground />
 
+      {/* NAVBAR */}
+      <Navbar />
+
       {/* HERO */}
-      <div className="relative z-10">
+      <div id="hero" className="relative z-10">
         <Hero />
       </div>
 
