@@ -1,10 +1,9 @@
 "use client";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 import React, {
   useState,
   useEffect,
   useRef,
-  RefObject,
   useCallback,
 } from "react";
 
@@ -113,12 +112,14 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
       stars.forEach((star) => {
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        const animatedOpacity =
-          star.twinkleSpeed !== null
-            ? 0.5 + Math.abs(Math.sin((Date.now() * 0.001) / star.twinkleSpeed) * 0.5)
-            : star.opacity;
-        ctx.fillStyle = `rgba(255, 255, 255, ${animatedOpacity})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
         ctx.fill();
+
+        if (star.twinkleSpeed !== null) {
+          star.opacity =
+            0.5 +
+            Math.abs(Math.sin((Date.now() * 0.001) / star.twinkleSpeed) * 0.5);
+        }
       });
 
       animationFrameId = requestAnimationFrame(render);
